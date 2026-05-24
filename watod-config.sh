@@ -1,8 +1,9 @@
 ## ----------------------- watod Configuration File Override ----------------------------
 
 ##
-## HINT: You can copy the contents of this file to a watod-config.local.sh 
-##       file that is untrackable by git and readable by watod.
+## HINT: Settings live in watod-config.local.sh, which watod reads in place of
+##       this file. In this fork that local config is committed (not gitignored)
+##       so the repo's setup is self-contained.
 ##
 
 ## ----------------------- watod Configuration File Override ----------------------------
