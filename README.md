@@ -12,7 +12,7 @@ A four-node ROS 2 navigation pipeline. Each node takes what the one before it pr
 it into something closer to a wheel command.
 
 ```
-   /lidar         /odom/filtered        /goal_pose        /odom/filtered
+   /lidar         /odom/filtered       /goal_point        /odom/filtered
       │                  │                    │                  │
       ▼                  ▼                    ▼                  ▼
  ┌──────────┐      ┌────────────┐      ┌───────────┐      ┌───────────┐
