@@ -8,12 +8,26 @@ used as a personal project and learning journal. I document what I learn as I go
 
 ## The system
 
-A four-node ROS 2 navigation pipeline:
+A four-node ROS 2 navigation pipeline. Each node takes what the one before it produced and turns
+it into something closer to a wheel command.
 
-- **Costmap** — LiDAR → occupancy grid
-- **Map memory** — fuse costmaps into a global map
-- **Planner** — A* to a goal
-- **Control** — Pure Pursuit path following
+```
+   /lidar         /odom/filtered        /goal_pose        /odom/filtered
+      │                  │                    │                  │
+      ▼                  ▼                    ▼                  ▼
+ ┌──────────┐      ┌────────────┐      ┌───────────┐      ┌───────────┐
+ │ costmap  │─────►│ map memory │─────►│  planner  │─────►│  control  │─────►
+ └──────────┘      └────────────┘      └───────────┘      └───────────┘
+            /costmap            /map               /path              /cmd_vel
+
+  what I see        everything I've      a route to        wheel speeds
+  right now         seen so far          the goal          to follow it
+```
+
+- **Costmap** — LiDAR → occupancy grid. What's around the robot right now. [docs/04](docs/04-costmap-node.md)
+- **Map memory** — fuse costmaps into a global map. What's been seen so far. [docs/05](docs/05-map-memory-node.md)
+- **Planner** — A* from the robot to a goal, over the map
+- **Control** — Pure Pursuit, turning that route into wheel speeds
 
 ## Credit
 

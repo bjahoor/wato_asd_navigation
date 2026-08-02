@@ -14,6 +14,8 @@ void CostmapNode::lidarCallback(const sensor_msgs::msg::LaserScan::SharedPtr sca
   costmap_.initializeCostmap();
 
   // Step 2: convert each valid reading to a cell and mark it
+  size_t valid_readings = 0;
+
   for (size_t i = 0; i < scan->ranges.size(); ++i) {
     const double range = scan->ranges[i];
 
@@ -22,12 +24,20 @@ void CostmapNode::lidarCallback(const sensor_msgs::msg::LaserScan::SharedPtr sca
       continue;
     }
 
+    ++valid_readings;
+
     const double angle = scan->angle_min + i * scan->angle_increment;
 
     int x_grid, y_grid;
     if (costmap_.convertToGrid(range, angle, x_grid, y_grid)) {
       costmap_.markObstacle(x_grid, y_grid);
     }
+  }
+
+  // The sensor can come up before the world does, giving a scan with nothing in
+  // it. Publishing that would claim the surroundings are clear.
+  if (valid_readings == 0) {
+    return;
   }
 
   // Step 3: fade cost outward from each obstacle

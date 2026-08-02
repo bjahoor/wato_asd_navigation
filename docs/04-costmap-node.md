@@ -51,6 +51,10 @@ Order of work:
 
 ## What runs on each scan
 
+```
+/lidar ──► [ wipe ──► mark ──► inflate ──► publish ] ──► /costmap
+```
+
 1. **Wipe** — every cell back to 0
 2. **Mark** — each valid reading becomes a cell, set to 100
 3. **Inflate** — cost spreads outward from each marked cell
@@ -71,7 +75,7 @@ within the radius, rejects the corners that fall outside it, and scales cost by
 
 | function | file | what it does |
 |---|---|---|
-| `lidarCallback` | node | drops invalid readings, then runs the four steps for one scan |
+| `lidarCallback` | node | drops invalid readings, then runs the four steps for one scan; publishes nothing if a scan has no valid readings at all |
 | `initializeCostmap` | core | resets every cell to 0 and forgets the previous scan's obstacles |
 | `convertToGrid` | core | polar reading → cell indices; false if off the grid |
 | `markObstacle` | core | sets a cell to 100, remembers it for inflation |
