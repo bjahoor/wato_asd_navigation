@@ -65,16 +65,14 @@ See [docs/06](docs/06-planner-node.md#limitations).
 
 ## Docs
 
-| | |
-|---|---|
-| [00](docs/00-setup.md) | Setup on a fresh machine |
-| [01](docs/01-configure-watod.md) | Configuring watod |
-| [02](docs/02-code-a-node.md) | Coding a node |
-| [03](docs/03-test-the-node.md) | Building and testing it |
-| [04](docs/04-costmap-node.md) | Costmap node |
-| [05](docs/05-map-memory-node.md) | Map memory node |
-| [06](docs/06-planner-node.md) | Planner node |
-| [07](docs/07-control-node.md) | Control node |
+- [00](docs/00-setup.md) — Setup on a fresh machine
+- [01](docs/01-configure-watod.md) — Configuring watod
+- [02](docs/02-code-a-node.md) — Coding a node
+- [03](docs/03-test-the-node.md) — Building and testing it
+- [04](docs/04-costmap-node.md) — Costmap node
+- [05](docs/05-map-memory-node.md) — Map memory node
+- [06](docs/06-planner-node.md) — Planner node
+- [07](docs/07-control-node.md) — Control node
 
 ## Credit
 
