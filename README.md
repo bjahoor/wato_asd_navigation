@@ -50,7 +50,9 @@ Needs Docker. Full setup in [docs/00](docs/00-setup.md).
 `ws://localhost:20000`.
 
 Import [`config/wato_asd_training_foxglove_config.json`](config/wato_asd_training_foxglove_config.json)
-(Layouts → Import). It has the 3D panel set up, plus a Teleop panel for driving the robot manually.
+(Layouts → Import).
+
+The layout has the 3D panel set up, plus a Teleop panel for driving the robot manually.
 
 ## Sending a goal
 
