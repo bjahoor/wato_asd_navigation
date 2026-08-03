@@ -48,6 +48,10 @@ The cost weight is the one worth understanding. A step's price is its length mul
 crossing open ground, so A\* will happily walk five metres around rather than one metre through.
 Turn it up and the robot hugs the centre of every gap; turn it down and it starts clipping corners.
 
+What this weight cannot do is push the route further out than the buffer reaches. Past the costmap's
+inflation radius every cell costs the same, so the planner has no reason to prefer one over another.
+Clearance is set there, in [04](04-costmap-node.md), not here.
+
 ## How I built it
 
 Same split as the other two:

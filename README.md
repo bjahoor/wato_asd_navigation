@@ -26,8 +26,8 @@ it into something closer to a wheel command.
 
 - **Costmap** — LiDAR → occupancy grid. What's around the robot right now. [docs/04](docs/04-costmap-node.md)
 - **Map memory** — fuse costmaps into a global map. What's been seen so far. [docs/05](docs/05-map-memory-node.md)
-- **Planner** — A* from the robot to a goal, over the map
-- **Control** — Pure Pursuit, turning that route into wheel speeds
+- **Planner** — A* from the robot to a goal, over the map. [docs/06](docs/06-planner-node.md)
+- **Control** — Pure Pursuit, turning that route into wheel speeds. [docs/07](docs/07-control-node.md)
 
 ## Credit
 

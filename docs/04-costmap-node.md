@@ -25,7 +25,7 @@ now. Remembering anything is the map memory node's job.
 | resolution | 0.1 m/cell | finer than the map, so fusion leaves no holes |
 | grid size | 200 × 200 cells | 10m in every direction — a deliberate crop of the lidar's 20m reach |
 | origin | (−10, −10) | puts the robot at the centre, not the corner |
-| inflation radius | 1.0 m | roughly a robot width of clearance |
+| inflation radius | 2.0 m | the furthest the planner can ever be pushed off an obstacle, since beyond it every cell costs the same |
 | max cost | 100 | `OccupancyGrid` maximum |
 | publish rate | ~9 Hz | not chosen — it's whatever the lidar publishes at |
 

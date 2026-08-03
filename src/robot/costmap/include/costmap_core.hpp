@@ -47,7 +47,9 @@ class CostmapCore {
     static constexpr double kOriginX = -kWidth * kResolution / 2.0;
     static constexpr double kOriginY = -kHeight * kResolution / 2.0;
 
-    static constexpr double kInflationRadius = 1.0;
+    // How far the buffer reaches. This is the most clearance the planner can
+    // ever ask for, since past it every cell costs the same.
+    static constexpr double kInflationRadius = 2.0;
     static constexpr int8_t kMaxCost = 100;
 
     std::vector<int8_t> grid_;
