@@ -49,14 +49,16 @@ Needs Docker. Full setup in [docs/00](docs/00-setup.md).
 `up` holds the terminal. Open [Foxglove](https://app.foxglove.dev/) and connect to
 `ws://localhost:20000`.
 
-In the 3D panel, add `/map`, `/path` and `/costmap`.
+Import [`config/wato_asd_training_foxglove_config.json`](config/wato_asd_training_foxglove_config.json)
+(Layouts → Import). It has the 3D panel set up, plus a Teleop panel for driving the robot manually.
 
 ## Sending a goal
 
 In a second terminal:
 
 ```bash
-./watod -t robot
+./watod -t robot    # open a shell inside the running robot container
+
 ros2 topic pub /goal_point geometry_msgs/msg/PointStamped "{header: {frame_id: sim_world}, point: {x: -12.0, y: 2.0}}"
 ```
 
