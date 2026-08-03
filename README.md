@@ -76,14 +76,16 @@ See [docs/06](docs/06-planner-node.md#limitations).
 
 ## Docs
 
-- [00](docs/00-setup.md) — Setup on a fresh machine
-- [01](docs/01-configure-watod.md) — Configuring watod
-- [02](docs/02-code-a-node.md) — Coding a node
-- [03](docs/03-test-the-node.md) — Building and testing it
-- [04](docs/04-costmap-node.md) — Costmap node
-- [05](docs/05-map-memory-node.md) — Map memory node
-- [06](docs/06-planner-node.md) — Planner node
-- [07](docs/07-control-node.md) — Control node
+| Step | What it covers |
+|---|---|
+| [00 — Setup](docs/00-setup.md) | Getting the repo running on a fresh machine |
+| [01 — Configure watod](docs/01-configure-watod.md) | Which modules launch, and what watod does |
+| [02 — Code a node](docs/02-code-a-node.md) | Writing a first publisher |
+| [03 — Test the node](docs/03-test-the-node.md) | Build, run, and see it in Foxglove |
+| [04 — Costmap](docs/04-costmap-node.md) | LiDAR scans into a local occupancy grid |
+| [05 — Map memory](docs/05-map-memory-node.md) | Fusing costmaps into a world-fixed map |
+| [06 — Planner](docs/06-planner-node.md) | A\* across the map to a goal |
+| [07 — Control](docs/07-control-node.md) | Pure Pursuit, turning the route into wheel speeds |
 
 ## Credit
 
