@@ -5,7 +5,12 @@ and it builds its own picture of the world, plans a route around what it finds, 
 
 Built step by step, documented in [`docs/`](docs/).
 
-<!-- demo video goes here -->
+### ▶ [Watch the demo](docs/assets/demo.mp4)
+
+<a href="docs/assets/demo.mp4">
+  <img src="docs/assets/demo.png" width="560"
+       alt="The robot's map, the inflated cost around each obstacle, and the planned path">
+</a>
 
 ## The system
 
