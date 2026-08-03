@@ -7,17 +7,20 @@ Built step by step, documented in [`docs/`](docs/).
 
 ### ▶ [Watch the demo](docs/assets/demo.mp4)
 
-<a href="docs/assets/demo.mp4">
-  <img src="docs/assets/demo.png" width="560"
-       alt="The robot's map, the inflated cost around each obstacle, and the planned path">
-</a>
+<p align="center">
+  <a href="docs/assets/demo.mp4">
+    <img src="docs/assets/demo.png" width="560"
+         alt="The robot's map, the inflated cost around each obstacle, and the planned path">
+  </a>
+</p>
 
 ## The system
 
 A four-node ROS 2 navigation pipeline, written from scratch. Each node takes what the one before it
 produced and turns it into something closer to a wheel command.
 
-```
+<div align="center">
+<pre>
                                        you, in Foxglove
                                               │
                                          /goal_point
@@ -32,7 +35,8 @@ produced and turns it into something closer to a wheel command.
       │              ┌───────────────────────────────────────────────┐
       └──────────────┤              Gazebo — the robot               │
                      └───────────────────────────────────────────────┘
-```
+</pre>
+</div>
 
 A closed loop: the wheel speeds move the robot, which changes what the LiDAR sees, which changes
 the route. `/odom/filtered` feeds map memory, planner and control as well as the costmap.
