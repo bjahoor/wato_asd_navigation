@@ -19,8 +19,7 @@ Built step by step, documented in [`docs/`](docs/).
 A four-node ROS 2 navigation pipeline, written from scratch. Each node takes what the one before it
 produced and turns it into something closer to a wheel command.
 
-<div align="center">
-<pre>
+```
                                        you, in Foxglove
                                               │
                                          /goal_point
@@ -35,8 +34,7 @@ produced and turns it into something closer to a wheel command.
       │              ┌───────────────────────────────────────────────┐
       └──────────────┤              Gazebo — the robot               │
                      └───────────────────────────────────────────────┘
-</pre>
-</div>
+```
 
 A closed loop: the wheel speeds move the robot, which changes what the LiDAR sees, which changes
 the route. `/odom/filtered` feeds map memory, planner and control as well as the costmap.
