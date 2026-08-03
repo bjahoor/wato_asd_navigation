@@ -1,34 +1,84 @@
 # wato_asd_navigation
 
-My implementation of the [WATonomous ASD admission assignment](https://wiki.watonomous.ca/admission_assignments/asd_admission_assignment/) —
-autonomous navigation for a simulated differential-drive robot in ROS 2 (C++).
+Autonomous navigation for a differential-drive robot in ROS 2 and C++. Give it a point to drive to
+and it builds its own picture of the world, plans a route around what it finds, and drives there.
 
-A fork of [WATonomous/wato_asd_training](https://github.com/WATonomous/wato_asd_training),
-used as a personal project and learning journal. I document what I learn as I go in [`docs/`](docs/).
+Built step by step, documented in [`docs/`](docs/).
+
+<!-- demo video goes here -->
 
 ## The system
 
-A four-node ROS 2 navigation pipeline. Each node takes what the one before it produced and turns
-it into something closer to a wheel command.
+A four-node ROS 2 navigation pipeline, written from scratch. Each node takes what the one before it
+produced and turns it into something closer to a wheel command.
 
 ```
-   /lidar         /odom/filtered       /goal_point        /odom/filtered
-      │                  │                    │                  │
-      ▼                  ▼                    ▼                  ▼
- ┌──────────┐      ┌────────────┐      ┌───────────┐      ┌───────────┐
- │ costmap  │─────►│ map memory │─────►│  planner  │─────►│  control  │─────►
- └──────────┘      └────────────┘      └───────────┘      └───────────┘
-            /costmap            /map               /path              /cmd_vel
-
-  what I see        everything I've      a route to        wheel speeds
-  right now         seen so far          the goal          to follow it
+                                       you, in Foxglove
+                                              │
+                                         /goal_point
+                                              │
+                                              ▼
+ ┌─────────┐ /costmap ┌────────────┐ /map ┌─────────┐ /path ┌─────────┐
+ │ costmap │─────────►│ map memory │─────►│ planner │──────►│ control │
+ └─────────┘          └────────────┘      └─────────┘       └─────────┘
+      ▲                                                          │
+      │ /lidar, /odom/filtered                                   │ /cmd_vel
+      │                                                          ▼
+      │              ┌───────────────────────────────────────────────┐
+      └──────────────┤              Gazebo — the robot               │
+                     └───────────────────────────────────────────────┘
 ```
+
+A closed loop: the wheel speeds move the robot, which changes what the LiDAR sees, which changes
+the route. `/odom/filtered` feeds map memory, planner and control as well as the costmap.
 
 - **Costmap** — LiDAR → occupancy grid. What's around the robot right now. [docs/04](docs/04-costmap-node.md)
 - **Map memory** — fuse costmaps into a global map. What's been seen so far. [docs/05](docs/05-map-memory-node.md)
 - **Planner** — A* from the robot to a goal, over the map. [docs/06](docs/06-planner-node.md)
 - **Control** — Pure Pursuit, turning that route into wheel speeds. [docs/07](docs/07-control-node.md)
 
+## Running it
+
+Needs Docker. Full setup in [docs/00](docs/00-setup.md).
+
+```bash
+./watod build
+./watod up
+```
+
+`up` holds the terminal. Open [Foxglove](https://app.foxglove.dev/) and connect to
+`ws://localhost:20000`.
+
+In the 3D panel, add `/map`, `/path` and `/costmap`.
+
+## Sending a goal
+
+In a second terminal:
+
+```bash
+./watod -t robot
+ros2 topic pub /goal_point geometry_msgs/msg/PointStamped "{header: {frame_id: sim_world}, point: {x: -12.0, y: 2.0}}"
+```
+
+Pick goals in open ground — a goal inside a large obstacle will still plan a route.
+See [docs/06](docs/06-planner-node.md#limitations).
+
+## Docs
+
+| | |
+|---|---|
+| [00](docs/00-setup.md) | Setup on a fresh machine |
+| [01](docs/01-configure-watod.md) | Configuring watod |
+| [02](docs/02-code-a-node.md) | Coding a node |
+| [03](docs/03-test-the-node.md) | Building and testing it |
+| [04](docs/04-costmap-node.md) | Costmap node |
+| [05](docs/05-map-memory-node.md) | Map memory node |
+| [06](docs/06-planner-node.md) | Planner node |
+| [07](docs/07-control-node.md) | Control node |
+
 ## Credit
 
-Original assignment and scaffold by [WATonomous](https://www.watonomous.ca/). Licensed under Apache 2.0.
+Scaffolded by [WATonomous](https://www.watonomous.ca/) — their
+[starter repo](https://github.com/WATonomous/wato_asd_training) and
+[spec](https://wiki.watonomous.ca/admission_assignments/asd_admission_assignment/).
+Licensed under Apache 2.0.
